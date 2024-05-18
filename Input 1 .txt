@@ -1,0 +1,516 @@
+Input 1 :
+1000
+Output 1 :
+{'1': 1, '0': 0}
+Input 2 :
+1994
+Output 2 :
+{'1': 1, '9': 9, '4': 4}
+n=input()
+d={i:int(i) for i in n}
+print(d)
+
+Input 1 :
+3
+1
+10
+2
+5
+3
+20
+Output 1 :
+5
+Input 2 :
+2
+1
+15
+2
+10
+Output 2 :
+10
+
+s = int(input())
+my_dict = {}
+for _ in range(s):
+    key = int(input())
+    value = int(input())
+    my_dict[key] = value
+min_value = min(my_dict.values())
+print(min_value)
+
+Input 1 :
+2
+7
+8
+9
+10
+Output 1 :
+{7: 9, 8: 10}
+90
+Input 2 :
+2
+80
+12
+90
+100
+Output 2 :
+{80: 90, 12: 100}
+9000
+
+s = int(input())
+keys = [int(input()) for _ in range(s)]
+values = [int(input()) for _ in range(s)]
+my_dict = dict(zip(keys, values))
+print(my_dict)
+multiplied_value = 1
+for value in my_dict.values():
+    multiplied_value *= value
+print(multiplied_value)
+
+Input 1 :
+4
+2 3
+4 7
+8 11
+3 6
+Output 1 :
+Min and Max of index 1: (2, 8)
+Min and Max of index 2: (3, 11)
+Input 2 :
+5
+15 42
+45 78
+15 21
+74 58
+26 85
+Output 2 :
+Min and Max of index 1: (15, 74)
+Min and Max of index 2: (21, 85)
+
+n = int(input())
+tuples_list = []
+for _ in range(n):
+    tuple_elements = tuple(map(int, input().split()))
+    tuples_list.append(tuple_elements)
+min_index_1 = min_index_2 = float('inf')
+max_index_1 = max_index_2 = float('-inf')
+for tuple_elem in tuples_list:
+    min_index_1 = min(min_index_1, tuple_elem[0])
+    max_index_1 = max(max_index_1, tuple_elem[0])
+    min_index_2 = min(min_index_2, tuple_elem[1])
+    max_index_2 = max(max_index_2, tuple_elem[1])
+print(f"Min and Max of index 1: ({min_index_1}, {max_index_1})")
+print(f"Min and Max of index 2: ({min_index_2}, {max_index_2})")
+
+Input 1 :
+3
+2 3
+2 4
+3 0
+Output 1 :
+[(3, 0), (2, 3), (2, 4)]
+
+N = int(input())
+tuples_list = []
+for _ in range(N):
+    tuple_elements = tuple(map(int, input().split()))
+    tuples_list.append(tuple_elements)
+s_tuples = sorted(tuples_list, key=lambda x: sum(x))
+print(s_tuples)
+
+Input 1 :
+2022-01-12 06:10:00
+2022-02-12 10:10:12
+Output 1 :
+2022-01-12 06:10:00
+2022-02-12 10:10:12
+Input 2 :
+2022-01-12 06:10:00
+2022-02-12 10:00:
+Output 2 :
+Event time is not in the format
+
+from datetime import datetime
+
+def validate_time_format(time_str):
+    try:
+        datetime.strptime(time_str, '%Y-%m-%d %H:%M:%S')
+        return True
+    except ValueError:
+        return False
+
+def main():
+    try:
+        start_time = input().strip()
+        if not validate_time_format(start_time):
+            raise ValueError("Event time is not in the format")
+
+        end_time = input().strip()
+        if not validate_time_format(end_time):
+            raise ValueError("Event time is not in the format")
+
+        print(start_time)
+        print(end_time)
+
+    except ValueError as e:
+        print(e)
+
+if __name__ == "__main__":
+    main()
+Jeeva
+56
+100
+98
+Rahul
+55
+102
+50
+
+Output 1 :
+Enter the Name of the Student 
+Enter the Mark1
+Enter the Mark2
+Enter the Mark3
+Average of Marks  84.66666666666667
+Enter the Name of the Student 
+Enter the Mark1
+Enter the Mark2
+Enter the Mark3
+Marks should not be Negative and out of range
+
+Input 2 :
+Surya
+76
++
+100
+Sachin
+89
+55
+98
+Output 2 :
+Enter the Name of the Student 
+Enter the Mark1
+Enter the Mark2
+invalid literal for int() with base 10: '+'
+
+# You are using Python
+class MyException(Exception):
+    pass
+try:
+    for _ in range(2):
+      try:
+          input_name=input("Enter the Name of the Student\n")
+          input_mark1=int(input("Enter the Mark1\n"))
+          input_mark2=int(input("Enter the Mark2\n"))
+          input_mark3=int(input("Enter the Mark3\n"))
+          if input_mark1>100 or input_mark2>100 or input_mark3>100 or input_mark1<0 or input_mark2<0 or input_mark3<0:
+              raise MyException("Marks should not be Negative and out of range \n")
+          avg=(input_mark1+input_mark2+input_mark3)/3
+          print("Average of Marks ",avg)
+      except ValueError as e:
+            print(e)
+            break
+except MyException as e:
+    print(e)
+
+Input 1 :
+1 2 3 4 5
+Output 1 :
+15
+Input 2 :
+1 2 3 4 hi hello 7.5
+Output 2 :
+Only Integers are allowed
+
+# You are using Python
+try:
+    values = input().strip().split()
+    integers = [int(value) for value in values]
+    total = sum(integers)
+    with open('output.txt', 'w') as f:
+        f.write(str(total))
+except:
+    with open('output.txt', 'w') as f:
+        f.write('Only Integers are allowed')
+
+Input 1 :
+3
+4 2
+6 3
+10 3
+Output 1 :
+2
+2
+3
+Input 2 :
+3
+10 2
+5 0
+2.5 2
+Output 2 :
+5
+integer division or modulo by zero
+invalid literal for int() with base 10: '2.5'
+
+# You are using Python
+try:
+  input_val=int(input())
+  for _ in range(input_val):
+    temp=input().split()
+    try:
+     print(int(temp[0])//int(temp[1]))
+    except ZeroDivisionError as e:
+       print(e)
+    except ValueError as e:
+        print(e)
+except ValueError as e:
+    print(e)
+
+Output 1 :
+Beautiful Is Better Than Ugly.
+Explicit Is Better Than Implicit.
+Simple Is Better Than Complex.
+Complex Is Better Than Complicated.
+Readability Counts.
+
+
+input_file = "input.txt"
+output_file = "output.txt" 
+with open(input_file, 'r') as infile:
+    lines = infile.readlines()
+capitalized_lines = [line.title() for line in lines]
+with open(output_file, 'w') as outfile:
+    outfile.writelines(capitalized_lines)
+
+with open(output_file, 'r') as outfile:
+    output_content = outfile.read()
+  
+
+
+Input 1 :
+Pediatric
+Output 1 :
+7
+
+import pymysql
+def getDbConnection():
+    connection = pymysql.connect('localhost','rootuser','rootuser','rootuser')
+    return connection
+
+def closeDbConnection(connection):
+    connection.close()
+
+def getResult(SqlQuery,Speciality):
+    connection = getDbConnection()
+    cursor = connection.cursor()
+    cursor.execute(SqlQuery,(Speciality))
+    records = cursor.fetchone()
+    for record in records:
+        print(record)
+    closeDbConnection(connection)
+
+Speciality = input()
+
+
+
+SqlQuery = "SELECT COUNT(*) FROM Doctor_Info WHERE Speciality = %s;"
+getResult(SqlQuery,Speciality)
+    
+
+Input 1 :
+105
+Output 1 :
+('Hazel', 'Langenbasch')
+('Rajesh', 'A')
+('Srinivasan', 'K')
+
+def getResult(SqlQuery,emp_id):
+    connection = getDbConnection()
+    cursor = connection.cursor()
+    cursor.execute(SqlQuery,(emp_id))
+    records = cursor.fetchall()
+    for record in records:
+        print(record)
+    closeDbConnection(connection)
+
+Input 1 :
+250
+Output 1 :
+('Cheese', '12 - 100g packets')
+('Cottage Cheese', '5- 100g packets ')
+('Peanut Butter', '10 - 500ml bottles')
+
+
+
+def getResult(SqlQuery, emp_id):
+    connection = getDbConnection()
+    cursor = connection.cursor()
+    cursor.execute(SqlQuery, (emp_id,))
+    result = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    for row in result:
+        print(row)
+
+Input 1 :
+Action
+8
+Output 1 :
+(12, 'Avengers End Game', 'Action', 8.5)
+(3, 'Speed', 'Action', 8.2)
+
+import pymysql
+def getDbConnection():
+    connection = pymysql.connect('localhost','rootuser','rootuser','rootuser')
+    return connection
+
+def closeDbConnection(connection):
+    connection.close()
+
+def getResult(SqlQuery,genre,rating):
+    connection = getDbConnection()
+    cursor = connection.cursor()
+    cursor.execute(SqlQuery,(genre,rating))
+    records = cursor.fetchall()
+    for record in records:
+        print(record)
+    closeDbConnection(connection)
+
+
+SqlQuery = "select * from cinemas where genre = %s and rating > %s order by rating desc"
+
+genre = input()
+rating = float(input())
+
+getResult(SqlQuery,genre,rating)
+    
+
+Input 1 :
+James
+Output 1 :
+Customer Details
+(101, 'James', 'MicroWave', 1005)
+(101, 'James', 'Backup Charger', 1008)
+Input 2 :
+Jack
+Output 2 :
+The Searched Jack not in the list
+
+import pymysql
+def getDbConnection():
+    connection = pymysql.connect('localhost','rootuser','rootuser','rootuser')
+    return connection
+
+def closeDbConnection(connection):
+    connection.close()
+
+def getResult(SqlQuery,name):
+    connection = getDbConnection()
+    cursor = connection.cursor()
+    cursor.execute(SqlQuery,name)
+    
+    records = cursor.fetchall()
+    if (len(records)==0):
+        print("The Searched %s not in the list"%name)
+    else:    
+        print("Customer Details")
+        for record in records:
+            print(record)
+    closeDbConnection(connection)
+    
+name=input()
+SqlQuery ="select * from Orders where name=%s;"
+
+getResult(SqlQuery,name)
+
+Input 1 :
+I Like program
+Output 1 :
+(' ', 2) ('I', 1) ('L', 1) ('a', 1) ('e', 1) ('g', 1) ('i', 1
+
+def count_character_frequency(input_string):
+    frequency = {}
+    for char in input_string:
+        frequency[char] = frequency.get(char, 0) + 1
+    sorted_frequency = sorted(frequency.items())
+    for char, count in sorted_frequency:
+        print(f"('{char}', {count})")
+input_string = input()
+count_character_frequency(input_string)
+
+Output 1 :
+key1: 1 is present in both x and y
+
+for (key, value) in set(x.items()) & set(y.items()):
+    print('%s: %s is present in both x and y' % (key, value))
+
+Output 1 :
+['g', 'h', 'm', 'n', 'p', 'r', 't', 'y']
+['a', 'e', 'g', 'h', 'i', 'm', 'n', 'o', 'p', 'r', 't', 'u', 'y']
+['a', 'i', 'o']
+['g', 'h', 'm', 'n', 'p', 'r', 't', 'y']
+Not found
+
+print(sorted((set1.difference(set2))))
+print(sorted((set1.union(set2))))
+print(sorted((set1.intersection(set2))))
+print(sorted((set1.difference(set2))))
+result =  all(elem in set1  for elem in set2)
+if result:
+    print("All vowels are in X")
+else:
+    print("Not found")
+
+Input 1 :
+5
+Rice 50
+Banana 25.5
+Milk 45
+Tomato 15.75
+Orange 60.5
+Output 1 :
+Orange 60.5
+
+# You are using Python
+n=int(input())
+
+d={}
+for i in range(n):
+    s=input().split()
+    d[s[0]]=float(s[1])
+m=max(d.values())
+print(list(d.keys())
+      [list(d.values()).index(m)],m)
+
+Input 1 :
+5
+1 2 3
+1 2
+4 5 6
+1
+9 8 8 7
+Output 1 :
+[(1,), (1, 2), (1, 2, 3), (4, 5, 6), (9, 8, 8, 7)]
+
+# You are using Python
+for i in range(n):
+    arr.append(tuple(map(int,input().split())))
+arr.sort(key=lambda x: x[-1])
+print(arr)
+
+Input 1 :
+6
+1 2 3 4 5 6
+3
+5 1 6
+Output 1 :
+True
+
+n = int(input())
+arr1 = [int(i) for i in input().split()][:n]
+m = int(input())
+arr2 = [int(i) for i in input().split()][:m]
+arr1=tuple(arr1)
+arr2=tuple(arr2)
+print(set(arr2).issubset(arr1))
+    

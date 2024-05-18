@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Form Validation</title>
+</head>
+<body >
+<div class="container mt-5">
+    <div class="card shadow-lg rounded">
+        <div class="card-header bg-info text-white">
+            <h3 class="mb-2">Registration Form</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="myForm" onsubmit="return validateForm()" style="background-color: #92C7C7; padding: 20px; border-radius: 15px;">
+                       
+                        <div class="form-group text-dark font-weight-bold ">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control custom-input" id="name" placeholder="Enter your name">
+                            <span id="nameError" class="error"></span><br><br>
+                        </div>
+                       
+                        <div class="form-group text-dark font-weight-bold ">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control custom-input" id="email" placeholder="Enter your email">
+                            <span id="emailError" class="error"></span><br><br>
+                        </div>
+
+                        <div class="form-group text-dark font-weight-bold ">
+                            <label for="mobile">Mobile Number:</label>
+                            <input type="tel" class="form-control custom-input" id="mobile" placeholder="Enter your mobile number">
+                            <span id="mobileError" class="error"></span><br><br>
+                        </div>
+
+                        <div class="form-group text-dark font-weight-bold ">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control custom-input" id="password" placeholder="Enter your password">
+                            <span id="passwordError" class="error"></span><br><br>
+                        </div>
+
+                        <div class="form-group text-dark font-weight-bold ">
+                            <label for="confirmPassword">Confirm Password:</label>
+                            <input type="password" class="form-control custom-input" id="confirmPassword" placeholder="Confirm your password">
+                            <span id="confirmPasswordError" class="error"></span><br><br>
+                        </div>
+
+                        <div class="form-group text-dark font-weight-bold ">
+                            <input type="checkbox" class="form-check-input" id="checkbox" onchange="enableSubmitButton()">
+                            <label class="form-check-label" for="checkbox">Agree to terms</label>
+                            <span id="checkboxError" class="error"></span><br><br>
+                        </div>
+
+                        <div class="form-group text-dark font-weight-bold ">
+                            <label>Gender:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                            <span id="genderError" class="error"></span><br><br>
+                        </div>
+
+                        <div class="form-group text-dark font-weight-bold ">
+                            <label for="country">Country:</label>
+                            <select class="form-control custom-input" id="country">
+                                <option value="">Select</option>
+                                <option value="USA">USA</option>
+                                <option value="INDIA">INDIA</option>
+                                <option value="CANADA">CANADA</option>
+                            </select>
+                            <span id="countryError" class="error"></span><br><br>
+                        </div>
+                        <label for="course">Select Course:</label>
+                        <select id="course" onchange="populateStreams()" class="form-control custom-input">
+                            <option value="">Select Course</option>
+                            <option value="BE">BE</option>
+                            <option value="BTECH">B.Tech</option>
+                        </select>
+
+                        <label for="stream">Select Stream:</label>
+                        <select id="stream" class="form-control custom-input">
+                            <option value="">Select Stream</option>
+                        </select>
+
+                        <button type="submit" id="submitBtn" class="btn btn-primary mt-3" disabled>Submit</button>
+                    </form>
+                </div>
+
+               <script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('submitBtn').disabled = true;
+});
+
+function enableSubmitButton() {
+    var agreeTerms = document.getElementById('checkbox').checked;
+    if (agreeTerms) {
+        document.getElementById('submitBtn').disabled = false;
+    } else {
+        document.getElementById('submitBtn').disabled = true;
+    }
+}
+
+function validateForm() {
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var mobile = document.getElementById('mobile').value;
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+    var agreeTerms = document.getElementById('checkbox').checked;
+    var gender = document.querySelector('input[name="gender"]:checked');
+    var country = document.getElementById('country').value;
+    var languages = document.querySelectorAll('input[type="checkbox"]:checked');
+    var course = document.getElementById('course').value;
+    var stream = document.getElementById('stream').value;
+    var errorElements = document.getElementsByClassName('error');
+
+    for (var i = 0; i < errorElements.length; i++) {
+        errorElements[i].innerHTML = '';
+    }
+
+    var isValid = true;
+    if (name === '') {
+        document.getElementById('nameError').innerHTML = 'Please enter your name';
+        isValid = false;
+    }
+    if (email === '') {
+        document.getElementById('emailError').innerHTML = 'Please enter your email';
+        isValid = false;
+    }
+    if (mobile === '') {
+        document.getElementById('mobileError').innerHTML = 'Please enter your mobile number';
+        isValid = false;
+    } else if (!/^\d{10}$/.test(mobile)) {
+        document.getElementById('mobileError').innerHTML = 'Mobile number must be exactly 10 digits';
+        isValid = false;
+    }
+    if (password === '') {
+        document.getElementById('passwordError').innerHTML = 'Please enter your password';
+        isValid = false;
+    } else if (!/(?=.*\d)(?=.*[a-zA-Z]).{8,}/.test(password)) {
+        document.getElementById('passwordError').innerHTML = 'Password must contain at least one digit and one character, and be at least 8 characters long';
+        isValid = false;
+    }
+    if (confirmPassword === '') {
+        document.getElementById('confirmPasswordError').innerHTML = 'Please confirm your password';
+        isValid = false;
+    } else if (password !== confirmPassword) {
+        document.getElementById('confirmPasswordError').innerHTML = 'Passwords do not match';
+        isValid = false;
+    }
+
+    if (!gender) {
+        document.getElementById('genderError').innerHTML = 'Please select your gender';
+        isValid = false;
+    }
+
+    if (country === '') {
+        document.getElementById('countryError').innerHTML = 'Please select your country';
+        isValid = false;
+    }
+
+    enableSubmitButton();
+    if (isValid) {
+        document.getElementById('enteredName').innerText = name;
+        document.getElementById('enteredEmail').innerText = email;
+        document.getElementById('enteredMobile').innerText = mobile;
+        document.getElementById('enteredPassword').innerText = password;
+        document.getElementById('enteredGender').innerText = gender.value;
+        document.getElementById('enteredCountry').innerText = country;
+        document.getElementById('enteredCourse').innerText = course;
+        document.getElementById('enteredStream').innerText = stream;
+
+    }
+
+    return false;
+}
+
+function populateStreams() {
+    var course = document.getElementById("course").value;
+    var streamSelect = document.getElementById("stream");
+    streamSelect.innerHTML = "";
+    var defaultOption = document.createElement("option");
+    defaultOption.text = "Select Stream";
+    defaultOption.value = "";
+    streamSelect.appendChild(defaultOption);
+
+    if (course === "BE") {
+        addOption(streamSelect, "CSE", "CSE");
+        addOption(streamSelect, "MECH", "MECH");
+        addOption(streamSelect, "CIVIL", "CIVIL");
+        addOption(streamSelect, "ECE", "ECE");
+        addOption(streamSelect, "EEE", "EEE");
+    } else if (course === "BTECH") {
+        addOption(streamSelect, "IT", "IT");
+        addOption(streamSelect, "FT", "FT");
+        addOption(streamSelect, "AIDS", "AIDS");
+        addOption(streamSelect, "AIML", "AIML");
+    }
+}
+
+function addOption(selectElement, text, value) {
+    var option = document.createElement("option");
+    option.text = text;
+    option.value = value;
+    selectElement.appendChild(option);
+}
+</script>
+</body>
+</html>
